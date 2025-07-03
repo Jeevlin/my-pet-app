@@ -1,0 +1,60 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.customers{
+    display: flex;
+    flex-direction: column;
+     
+}
+.title h3{
+     
+    margin-top: 30px;
+    margin-right:  900px;
+    
+}
+.line{
+    border: solid 1px rgb(22, 12, 112);
+    background-color:white;
+    height:350px;
+    width:800px;
+    margin-top:60px;
+    border-radius: 10px;
+    margin-left:100px;
+   
+}
+.number{
+    border:solid 1px  rgb(22, 12, 112);
+    width: 60px;
+    height:60px;
+    border-radius: 50px;
+    margin-left: 70px;
+    margin-top: 30px;
+    background-color: rgb(228, 218, 218);
+}
+.list{
+    display: grid;
+    justify-content: start;
+    margin-left: 150px;
+    font-weight: 700;
+    font-size: small;
+}
+.button{
+    background-color: rgb(7, 21, 61);
+    color: white;
+    border-radius:10px ;
+    height: 42px;
+    width: 250px;
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+.input{
+    border-radius:10px;
+    background-color:white ;
+    color:navy;
+    font-size: 16px;
+    padding-left: 10px;
+    font-weight: 400;
+
+}
+

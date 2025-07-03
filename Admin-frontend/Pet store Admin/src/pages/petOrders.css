@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+  
+}
+.petOrders{  
+    display: flex;
+    flex-direction: column;
+    
+    
+
+}
+.title h3{
+    width:300px;
+    font-weight: bold;
+    height: 20px;
+    
+}
+.outline{
+    border: solid 1px black;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 30px;
+    background-color: rgb(7, 21, 61);
+    padding: 10px;
+    
+   
+
+}
+.header{
+    background-color:  rgb(7, 21, 61);
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+
+.findbtn{
+    border-radius: 5px;
+    background-color: white;
+    font-weight: 700;
+    font-size: small;
+    color:  rgb(7, 21, 61);
+    width: 150px;
+}
+
+
+
+.container {
+    width: 100%;
+    margin-top: 30px;
+}
+  
+
+.order{
+    border: solid 1px black;
+    border-radius: 10px;
+    padding: 20px;
+    width: 45%; 
+    background-color: rgb(251, 251, 252);
+    overflow-y: auto;
+    
+}
+.summary{
+    font-weight: bold;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column; /* Ensure items stack vertically */
+    align-items: flex-start; /* Align items to the start horizontally */
+    margin-left: 70px;
+    position: relative;
+}

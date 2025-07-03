@@ -1,0 +1,31 @@
+.cardcomp{
+
+    border: solid 1px orange;
+    border-radius: 15px;
+    width:100%;
+    height: auto;
+    padding: 5px;
+    box-shadow: 0 4px 2px -2px BLACK;
+}
+.catimage{
+    height: 160px;
+    width:150px;
+  
+
+}
+.flexdiv{
+    display: flex;
+    justify-content: center;
+
+}
+.orderbtn{
+    border: solid 1px orange;
+    border-radius: 20px;
+    background-color: white;
+    color: black;
+    padding: 0px;
+    font-size: 16px;
+    height: 35px;
+    width: 100px;
+   
+}

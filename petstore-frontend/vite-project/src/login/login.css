@@ -1,0 +1,44 @@
+.login{
+    background-color: rgb(7, 21, 61);
+    margin: 0 auto;
+    padding: 80px;
+    height: 100vh;
+    color: white;
+}
+.comnbtn{
+    
+    background-color: white;
+    color:  rgb(7, 21, 61);
+    border-radius: 10px;
+    font-size: medium;
+    font-weight: 700;
+    padding-bottom: 5px;
+    width:300px
+   
+}
+.colbox{
+   
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        min-height: 80vh;
+        width: 80vh;
+}
+.forgotpwd{
+   
+        display:flex;
+        justify-content:flex-end;
+        text-decoration:none;
+        font-size:12px;
+        color:white;
+        margin-top:5px;
+}
+.click{
+    
+        display:flex;
+        font-size:11px;
+        text-align:left;
+        font-weight:bold;
+        justify-content:center;
+
+}

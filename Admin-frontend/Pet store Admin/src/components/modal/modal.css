@@ -1,0 +1,63 @@
+.outerline{
+    border: solid 2px rgb(22, 12, 112);
+    height: 140px;
+    width : 550px;
+    margin-left: 100px;
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    
+}
+.pet{
+    display: flex;
+    margin-left: 200px;
+    color: rgb(6, 6, 68);
+    font-size: 20px;
+   
+  
+}
+.titlebar{
+    background-color: darkorange;
+    font-weight: 700;
+    color: black;
+   
+
+}
+.inputline{
+    border: solid 1px rgb(6, 6, 68);
+    border-radius: 5px;
+    width :270px;
+    height: 35px;
+    background-color: white;
+    margin-left: 40px;
+    color: black;
+   
+}
+.savebutton{
+   
+    color: white;
+    background-color:  rgb(1, 1, 56);
+    width: 200px;
+    margin-top: 50px;
+
+}
+.buttonPet{
+    background-color: white;
+    color:rgb(7, 21, 61);
+    border: solid 1px rgb(7, 21, 61) ;
+    border-radius: 40px ;
+
+    width: 100px;
+    margin-top: 20px;
+}
+.savebutn{
+    background-color:rgb(7, 21, 61);
+    width: 300px;
+    height: 41px;
+}
+.titles{
+    background-color: darkorange;
+    font-weight: 700;
+    color: black;
+}
