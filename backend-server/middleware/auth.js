@@ -1,7 +1,8 @@
+require('dotenv').config()
 const multer =require('multer')
 const jwt  = require('jsonwebtoken')
 const AdminSchema = require('../models/adminModel')
-require('dotenv').config()
+
 
 const verifyjwt = async(req, res, next) => {
     try{
@@ -33,12 +34,14 @@ const verifyjwt = async(req, res, next) => {
         })
     }
 }
-const admin = require("firebase-admin"); // Ensure Firebase Admin SDK is set up
+const admin = require("firebase-admin");
 
-// Initialize Firebase Admin SDK
+const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
+
 admin.initializeApp({
-    credential: admin.credential.cert(require('../config/petstore-d5a99-firebase-adminsdk-bw3im-c66aad6c11.json')), // Or use a specific service account key
+  credential: admin.credential.cert(serviceAccount)
 });
+
 const authenticateFirebaseUser = async (req, res, next) => {
     const authHeader = req.headers.authorization;
 
