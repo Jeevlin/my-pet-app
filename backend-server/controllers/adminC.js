@@ -21,30 +21,38 @@ const addAdmin= async (req,res)=>{
 }
 
 
-const login= async (req,res)=>{
-   
-const { email, password } = req.body; // Accept adminId and password
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  console.log("Incoming login:", email, password); // ✅
 
   try {
-    // Check if admin exists
-    const admin = await AdminSchema.findOne({ email }); // Search admin in MongoDB
+    const admin = await AdminSchema.findOne({ email });
+    console.log("Admin found:", admin); // ✅
+
     if (!admin) {
       return res.status(404).json({ message: 'Admin not found' });
     }
 
-    // Check if password matches
-    if (bcrypt.compareSync(password,admin.password)) {
-    const accessToken = await admin.genAuthToken()
-     return res.status(200).json({ 
-      message: 'Login successful',
-      token: accessToken 
-    });
+    const isMatch = bcrypt.compareSync(password, admin.password);
+    console.log("Password match:", isMatch); // ✅
+
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Invalid password' });
     }
-    
+
+    const accessToken = await admin.genAuthToken();
+    console.log("Token generated"); // ✅
+
+    return res.status(200).json({
+      message: 'Login successful',
+      token: accessToken
+    });
   } catch (error) {
+    console.error("Login error:", error); // ✅ important
     res.status(500).json({ message: 'Error logging in', error });
   }
-}
+};
+
 const sendCredentials= async (req,res)=>{
 const { email } = req.body;
 
