@@ -2,9 +2,10 @@ import axios from 'axios';
 import firebase from '../component/firebase'; 
 import { auth } from '../component/firebase';
 import { getAuth } from 'firebase/auth';
-const apiUrl = 'http://localhost:4000/pet'
-const apiUrl1 = 'http://localhost:4000/category'
-const apiUrl2 ='http://localhost:4000/order'
+const api= 'https://my-pet-app-ovo1.onrender.com'
+const apiUrl = 'https://my-pet-app-ovo1.onrender.com/pet'
+const apiUrl1 = 'https://my-pet-app-ovo1.onrender.com/category'
+const apiUrl2 ='https://my-pet-app-ovo1.onrender.com/order'
 
 export const addPet = async(petData)=>{
     try{
@@ -39,7 +40,7 @@ export const editPet = async (petId, data) => {
     }
 
     try {
-        const response = await axios.put(`http://localhost:4000/pet/editPet/${petId}`, data);
+        const response = await axios.put(`${api}/pet/editPet/${petId}`, data);
         
         return response.data; // Return the updated data
     } catch(error){
@@ -53,7 +54,7 @@ export const FindPet = async (petId) => {
 
 
     try {
-        const response = await axios.get(`http://localhost:4000/pet/findPet/${petId}`);
+        const response = await axios.get(`${api}/pet/findPet/${petId}`);
         
         return response.data; // Return the updated data
     } catch(error){
