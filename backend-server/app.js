@@ -5,10 +5,7 @@ require('./db/db')
 require("dotenv").config();
 
 const cors = require('cors')
-app.use(cors( {
-  origin: "*",
-  credentials: true
-}))
+app.use(cors())
 
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,7 +21,7 @@ app.use('/order',orderRoute)
 app.use('/admin',adminRoute)
 
 app.listen(4000, () => {
-    console.log(`Server is running on http://localhost:4000`)
+    console.log(`Server is running on https://my-pet-app-ovo1.onrender.com`)
 })
 
 

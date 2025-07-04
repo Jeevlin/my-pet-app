@@ -1,8 +1,8 @@
 import axios from 'axios';
-const apiUrl = 'http://localhost:4000/pet'
-const apiUrl1 = 'http://localhost:4000/category'
-const apiUrl2 ='http://localhost:4000/order'
-const apiUrl3 ='http://localhost:4000/admin'
+const apiUrl = 'https://my-pet-app-ovo1.onrender.com/pet'
+const apiUrl1 = 'https://my-pet-app-ovo1.onrender.com/category'
+const apiUrl2 ='https://my-pet-app-ovo1.onrender.com/order'
+const apiUrl3 ='https://my-pet-app-ovo1.onrender.com/admin'
 
 export const addPet = async(petData)=>{
     try{
