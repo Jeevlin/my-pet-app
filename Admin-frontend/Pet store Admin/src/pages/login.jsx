@@ -1,7 +1,7 @@
 import React from "react";
 import image from '../assets/pet.jpg'
 import { useState } from "react";
-import {Navigate, useNavigate} from 'react-router-dom'
+import {Navigate, useNavigate,Link} from 'react-router-dom'
 import { toast } from "react-toastify";
 import { login } from "../../api.js/petApi";
 
@@ -57,7 +57,7 @@ return(
       type="password" placeholder='password'  value={password}
       onChange={(e) => setPassword(e.target.value)}>
       </input>
-      <div style={{display:"flex",justifyContent:"end"}}><a href="/forgot" className=' mb-3 forgotpwd'>Forgot password ?</a><br></br></div>
+      <div style={{display:"flex",justifyContent:"end"}}><Link to="/forgot" className=' mb-3 forgotpwd'>Forgot password ?</Link><br></br></div>
       <button className='comnbtn form-control' 
       style={{background:"darkblue",color:"white"}} type='submit'>Log in</button>
    
