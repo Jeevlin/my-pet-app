@@ -2,7 +2,7 @@ import './login.css';
 import image from "./pet.jpg"
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate,Link } from 'react-router-dom';
 import { auth } from '../component/firebase'
 import { toast } from "react-toastify";
 import { useState } from 'react';
@@ -55,8 +55,8 @@ function Login() {
         <a href="" className='forgotpwd'>Forgot password ?</a><br></br>
         <button className='comnbtn mt-1 ' type='submit'>Log in</button>
         <p className="click mt-3">click here to 
-        <a href="/register"
-        style={{textDecoration:"none",fontWeight:"bold",color: "darkorange"}}> Register New User</a> </p>
+        <Link to ="/register"
+        style={{textDecoration:"none",fontWeight:"bold",color: "darkorange"}}> Register New User</Link> </p>
         </div>
         </div>  
         </div>
