@@ -2,6 +2,7 @@ const  mongoose  = require("mongoose");
 const bcrypt = require("bcryptjs");
 const Schema = mongoose.Schema
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 const adminSchema = new Schema({
 
