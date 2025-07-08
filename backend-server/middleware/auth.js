@@ -16,7 +16,7 @@ const verifyjwt = async(req, res, next) => {
         const decode = jwt.verify(token, process.env.JWT_SECRET, { complete: true })
         console.log(decode.payload); 
 
-        const user = await AdminSchema.findById(decode._id)
+        const user = await AdminSchema.findById(decode.payload._id)
 
         if(!user){
             return res.status(404).json({
