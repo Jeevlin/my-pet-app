@@ -2,7 +2,7 @@ import './login.css';
 import image from "./pet.jpg"
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React from 'react'
-import { Link, useNavigate,Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../component/firebase'
 import { toast } from "react-toastify";
 import { useState } from 'react';
