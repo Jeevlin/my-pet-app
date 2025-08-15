@@ -10,12 +10,12 @@ import { toast } from "react-toastify"
 
 
 function Register() {
-  const [email, setEmail] = useState(" ");
-  const [password, setPassword] = useState(" ");
-  const [fname, setFname] = useState(" ");
-  const [lname, setLname] = useState(" ");
-  const[ username,setUsername]=useState(" ")
-  const[ number, setNumber]= useState(" ")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const[ username,setUsername]=useState("")
+  const[ number, setNumber]= useState("")
 
   
 const handleRegister = async (e) => {
@@ -36,6 +36,12 @@ const handleRegister = async (e) => {
         password:password
       });
     }
+    setEmail("");
+    setPassword("");
+    setFname("");
+    setLname("");
+    setUsername("");
+    setNumber("");
     
     console.log("User Registered Successfully!!");
     toast.success("User Registered Successfully!!", {

@@ -109,7 +109,7 @@ try{
 }catch(error){
     res.status(500).json({
         success:false,
-        message:err.message
+        message:error.message
     })
 
 }
