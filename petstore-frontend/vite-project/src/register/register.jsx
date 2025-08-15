@@ -68,6 +68,7 @@ const handleRegister = async (e) => {
                   <input
                    type="text"
                    placeholder="First Name"
+                   value={fname}
                    style={{borderRadius:"5px",padding:"3px" ,width:"300px "}}
                    className='mt-3 form-control'
                    onChange={(e) => setFname(e.target.value)} required>
@@ -75,10 +76,12 @@ const handleRegister = async (e) => {
                     </input><br></br>
                   <input type="text"
                   placeholder="User Name"
+                  value={username}
                   style={{borderRadius:"5px",padding:"3px" ,width:"300px "}}
                   className='mt-3 form-control ' 
                   onChange={(e) => setUsername(e.target.value)}required></input><br></br>
                   <input type="number"
+                  value={number}
                   placeholder="Phone Number"
                   style={{borderRadius:"5px",padding:"3px" ,width:"300px "}}
                   className='mt-3 form-control'
@@ -93,16 +96,19 @@ const handleRegister = async (e) => {
                
                   <input type="text"
                   placeholder="Last Name"
+                  value={lname}
                   style={{borderRadius:"5px",padding:"3px" ,width:"300px "}}
                   className='mt-3 form-control'
                    onChange={(e) => setLname(e.target.value)}required >
                     </input><br></br>
                   <input type="text"
+                  value={email}
                   placeholder="Email Address"
                   style={{borderRadius:"5px",padding:"3px" ,width:"300px "}}
                    className='mt-3 form-control' onChange={(e) => setEmail(e.target.value)}required >
                     </input><br></br>
                   <input type="password"
+                  value={password}
                   placeholder="Password"
                   style={{borderRadius:"5px",padding:"3px" ,width:"300px "}}
                   className='mt-3 form-control' 
