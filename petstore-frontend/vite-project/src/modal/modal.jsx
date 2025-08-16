@@ -227,6 +227,7 @@ export function SecondModal({ show, handleClose,setUserdata }) {
                     className="input mb-2"
                     type="password"
                     id="Password"
+                    placeholder='Enter a new password'
                     value={userDetails.Password|| ''}
                     onChange={(e) => setUserDetails({ ...userDetails, Password: e.target.value })}
                   />
