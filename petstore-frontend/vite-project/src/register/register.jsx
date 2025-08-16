@@ -112,7 +112,8 @@ const handleRegister = async (e) => {
                   placeholder="Password"
                   style={{borderRadius:"5px",padding:"3px" ,width:"300px "}}
                   className='mt-3 form-control' 
-                  onChange={(e) => setPassword(e.target.value)}required>
+                  onChange={(e) => setPassword(e.target.value)}
+                  required>
               
                   </input>
                   
