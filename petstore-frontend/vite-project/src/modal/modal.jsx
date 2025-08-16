@@ -7,7 +7,6 @@ import { useAuthContext } from '../context/auth/AuthContext';
 import { toast, ToastContainer } from "react-toastify";
 import { addOrder} from '../db/db';
 import {deleteOrder} from '../db/db';
-import { updatePassword } from "firebase/auth";
 
 export function FirstModal({show,handleClose,orderDetails}){
 
@@ -98,7 +97,6 @@ export function FirstModal({show,handleClose,orderDetails}){
 export function SecondModal({ show, handleClose,setUserdata }) {
   const [userDetails, setUserDetails] = useState({});
   const [loading, setLoading] = useState(true);
-    const [newPassword, setNewPassword] = useState(""); // separate state for password
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -147,19 +145,6 @@ export function SecondModal({ show, handleClose,setUserdata }) {
       const docRef = doc(db, "Users", user.uid); // Reference to the user's document in Firestore
       await updateDoc(docRef, userDetails);// Update Firestore document with new details
       console.log("User details updated:", userDetails);
-        if (newPassword.trim() !== "") {
-        try {
-          await updatePassword(user, newPassword);
-          toast.success("Password updated successfully", { position: "top-center" });
-        } catch (err) {
-          if (err.code === "auth/requires-recent-login") {
-            toast.error("Please log in again before updating password", { position: "top-center" });
-          } else {
-            toast.error(err.message, { position: "top-center" });
-          }
-          return; // stop here if password update failed
-        }
-      }
     
       const updatedDocSnap = await getDoc(docRef);  // Optionally, refresh the user details from Firestore
       if (updatedDocSnap.exists()) {
@@ -199,7 +184,7 @@ export function SecondModal({ show, handleClose,setUserdata }) {
                   <br />
                   <label className="label me-5">Mobile No:</label>
                   <br />
-                  <label className="label me-5"> New Password:</label>
+                  <label className="label me-5">Password:</label>
                   <br />
                 </div>
                 <div className="col-6">
@@ -242,9 +227,8 @@ export function SecondModal({ show, handleClose,setUserdata }) {
                     className="input mb-2"
                     type="password"
                     id="Password"
-                    placeholder='Enter a new password'
-                    value={newPassword|| ''}
-                    onChange={(e) => setNewPassword({ ...userDetails, Password: e.target.value })}
+                    value={userDetails.Password|| ''}
+                    onChange={(e) => setUserDetails({ ...userDetails, Password: e.target.value })}
                   />
                   <Button className="savebtn mb-5" onClick={handleSaveChanges}>Save Changes</Button>
                 </div>
