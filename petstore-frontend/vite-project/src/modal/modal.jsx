@@ -7,6 +7,7 @@ import { useAuthContext } from '../context/auth/AuthContext';
 import { toast, ToastContainer } from "react-toastify";
 import { addOrder} from '../db/db';
 import {deleteOrder} from '../db/db';
+import { updatePassword } from "firebase/auth";
 
 export function FirstModal({show,handleClose,orderDetails}){
 
@@ -97,6 +98,7 @@ export function FirstModal({show,handleClose,orderDetails}){
 export function SecondModal({ show, handleClose,setUserdata }) {
   const [userDetails, setUserDetails] = useState({});
   const [loading, setLoading] = useState(true);
+    const [newPassword, setNewPassword] = useState(""); // separate state for password
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -242,7 +244,7 @@ export function SecondModal({ show, handleClose,setUserdata }) {
                     id="Password"
                     placeholder='Enter a new password'
                     value={userDetails.Password|| ''}
-                    onChange={(e) => setUserDetails({ ...userDetails, Password: e.target.value })}
+                    onChange={(e) => setNewPassword({ ...userDetails, Password: e.target.value })}
                   />
                   <Button className="savebtn mb-5" onClick={handleSaveChanges}>Save Changes</Button>
                 </div>
