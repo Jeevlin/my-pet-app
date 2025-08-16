@@ -243,7 +243,7 @@ export function SecondModal({ show, handleClose,setUserdata }) {
                     type="password"
                     id="Password"
                     placeholder='Enter a new password'
-                    value={userDetails.Password|| ''}
+                    value={newPassword|| ''}
                     onChange={(e) => setNewPassword({ ...userDetails, Password: e.target.value })}
                   />
                   <Button className="savebtn mb-5" onClick={handleSaveChanges}>Save Changes</Button>
