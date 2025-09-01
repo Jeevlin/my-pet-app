@@ -30,12 +30,14 @@ function Homepage(){
  
   const [userdata,setUserdata]= useState(null)//user info
   const [pets, setPets] = useState([]); // Tracks all pets
-  const [category,setCategory]=useState('')
+  const [category,setCategory]=useState([])
   const [selectedCategory, setSelectedCategory] = useState('All'); // Tracks the selected category
   const [filteredPets, setFilteredPets] = useState([]); // Tracks the selected category pets
   const [petID, setPetID] = useState("");
   const[orderID,setOrderID]= useState('')
-  const [error, setError] = useState("");
+ const [petError, setPetError] = useState("");
+const [orderError, setOrderError] = useState("");
+
   const[ categoryIndex,setCategoryIndex] =useState(null)
 
   const [orderDetails, setOrderDetails] = useState({
@@ -46,24 +48,30 @@ function Homepage(){
     shippingDate: '',
     orderStatus: '',
 });
+useEffect(()=>{
+    const unsubscribe = auth.onAuthStateChanged(async(user)=>{
+       if (user){
+        try{
+            const docRef =  doc(db,"Users",user.uid)
+            const docSnap = await getDoc(docRef)
+            if(docSnap.exists()){
+                setUserdata(docSnap.data())
+            }else{
+                 console.log("No user document found");
+            }
 
+        }catch(error){
+            console.error("Error fetching user data:", error);
+             
+        }
+        }else{
+            console.error("User is not logged in");
+            setUserdata(null); // reset state when logged out
+       }
+    });
+    return()=>unsubscribe()
+},[])
   
-  const fetchUserData = async () => {
-    auth.onAuthStateChanged(async (user) => {
-      console.log(user);
-
-      const docRef = doc(db, "Users", user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setUserdata(docSnap.data());
-      } else {
-        console.log("User is not logged in");
-      }
-    });//fetches userdata
-  };
-  useEffect(() => {
-    fetchUserData();
-  }, []);
 
 
 // Filter pets whenever the selected category changes
@@ -83,9 +91,8 @@ useEffect(() => {
         try {
             const data = await getPets();
             setPets(data.data);
-            console.log(data)
         } catch (err) {
-            setError("failed to fetch");
+            setPetError("failed to fetch");
         } 
     };
 
@@ -112,28 +119,34 @@ useEffect(() => {
 
 
 const handleFindPet = async () => {
+    if (!petID) {
+     setPetError("Please enter a valid Pet ID.");
+      return;
+    }
     try {
      
         const data = await FindPet(petID); // Call the API with the entered pet ID
         console.log(data)
         if (data) {
-            setFilteredPets([data]); // Display only the found pet
-            setError(""); // Clear any previous errors
+            setFilteredPets([data]); // Display only the found pet 
+            setPetError(""); // Clear any previous errors
             setPetID("")
         } else {
             setFilteredPets([]); // Clear the display if no pet is found
-            setError("No pet found with the given ID");
+            setPetError("No pet found with the given ID");
+            toast.error("Pet Not Found", { position: "top-center" }); 
         }
     } catch (error) {
         console.error("Failed to find pet", error);
-        setError("An error occurred while fetching the pet");
+       setPetError("An error occurred while fetching the pet");
+       toast.error("Error fetching pet details.", { position: "top-center" });
     }
 };
 
 
 const handleFindOrder = async () => {
     if (!orderID) {
-      setError("Please enter a valid Order ID.");
+     setOrderError("Please enter a valid Order ID.");
       return;
     }
 
@@ -142,16 +155,16 @@ const handleFindOrder = async () => {
       if (response) {
         setOrderDetails(response); // Save fetched data to state
        handleFirstModalshow()// Open modal
-        setError(""); // Clear any previous error messages
+        setOrderError(""); // Clear any previous error messages
         setOrderID("")
       } else {
         setOrderDetails(null); // Clear previous data
-        setError("No order found with the given Order ID.");
+        setOrderError("No order found with the given Order ID.");
         toast.error("Order Not Found", { position: "top-center" }); 
       }
     } catch (error) {
       console.error("Error fetching order details:", error);
-      setError("An error occurred while fetching order details.");
+      setOrderError("An error occurred while fetching order details.");
       toast.error("Error fetching order details.", { position: "top-center" });
     }
   };
@@ -180,7 +193,7 @@ const handleFindOrder = async () => {
                         </div>
                     <div className="row"> 
                         <div className="col-2">
-                             <img  className="imghome" src={image} ></img>
+                             <img  className="imghome" src={image} alt="User profile"  ></img>
                         </div> 
                         {userdata ?(
 
@@ -205,7 +218,7 @@ const handleFindOrder = async () => {
                 </div>
                 
                 <div className="container">
-                    <div className="outline mt-5" style={{backgroundColor:"rgb(7, 21, 61)"}} > 
+                    <div className="outline mt-7" style={{backgroundColor:"rgb(7, 21, 61)"}} > 
                        
                         <h3 style={{color:"white"}}>Find Your Pet Order Status</h3>
                             <div className="header">
@@ -214,10 +227,12 @@ const handleFindOrder = async () => {
                              value={orderID}
                              onChange={(e) => setOrderID(e.target.value)}></input>
                             <button className="findbtn" onClick= {handleFindOrder}>Find status</button>
-                            <FirstModal show={showFirstModal} handleClose={handleFirstModalClose} orderDetails={orderDetails}/>
-      
+                         
+                            <FirstModal show={showFirstModal} handleClose={handleFirstModalClose} orderDetails={orderDetails||{}}/>
+        
                             
                         </div>
+                         {orderError && <p style={{ color: "red" }}>{orderError}</p>}
                     </div>
                 </div>
                 <div className="container"> 
@@ -234,17 +249,20 @@ const handleFindOrder = async () => {
                         <button className="filterbtn ms-2" style={{
                 backgroundColor: categoryIndex === null ? "navy" : "white",
                 color: categoryIndex === null ? "white" : "navy",
-            }} onClick={() => 
-            {setSelectedCategory('All') , setCategoryIndex(null);}}>All</button>
+            }} onClick={() => {
+            setSelectedCategory('All') ;
+             setCategoryIndex(null);
+            }}>All</button>
                 
               {category.length>0? (category.map((category,index)=>(
                     
-                    <button className="filterbtn ms-2" key={index}
+                    <button className="filterbtn ms-2" key={pets.id}
                     style={{
                         backgroundColor: categoryIndex === index ? "navy" : "white",
                         color: categoryIndex === index ? "white" : "navy",
                     }}
-                    onClick={() => {setSelectedCategory(category.category),setCategoryIndex(index)}}>{category.category}</button>
+                    onClick={() => {setSelectedCategory(category.category);
+                        setCategoryIndex(index)}}>{category.category}</button>
 
                 ))
             ):(
@@ -290,15 +308,29 @@ const handleFindOrder = async () => {
                               
                             </div>
                             
-                        {error && <p style={{ color: "red" }}>{error}</p>}
+                        {petError && <p style={{ color: "red" }}>{petError}</p>}
                     
                         </div>
                     </div>
                 </div>
+                    <ToastContainer 
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="colored"
+    />
             </div>
+
     </div>
 
     )
+    
 }
 
 export default Homepage;
