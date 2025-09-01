@@ -38,7 +38,7 @@ function Homepage(){
  const [petError, setPetError] = useState("");
 const [orderError, setOrderError] = useState("");
 
-  const[ categoryIndex,setCategoryIndex] =useState(null)
+  const[ selectedCategoryId,setSelectedCategoryId] =useState(null)
 
   const [orderDetails, setOrderDetails] = useState({
     userId:"",
@@ -247,22 +247,22 @@ const handleFindOrder = async () => {
                     <div className="outline mt-5"  >
                    
                         <button className="filterbtn ms-2" style={{
-                backgroundColor: categoryIndex === null ? "navy" : "white",
-                color: categoryIndex === null ? "white" : "navy",
+                backgroundColor: selectedCategoryId === null ? "navy" : "white",
+                color: selectedCategoryId === null ? "white" : "navy",
             }} onClick={() => {
             setSelectedCategory('All') ;
-             setCategoryIndex(null);
+             setSelectedCategoryId(null);
             }}>All</button>
                 
               {category.length>0? (category.map((cate)=>(
                     
                     <button className="filterbtn ms-2" key={cate._id}
                     style={{
-                        backgroundColor: categoryIndex === cate._id ? "navy" : "white",
-                        color: categoryIndex === cate._id ? "white" : "navy",
+                        backgroundColor: selectedCategoryId === cate._id ? "navy" : "white",
+                        color: selectedCategoryId === cate._id ? "white" : "navy",
                     }}
                     onClick={() => {setSelectedCategory(cate.category);
-                        setCategoryIndex(cate._id)}}>{cate.category}</button>
+                        setSelectedCategoryId(cate._id)}}>{cate.category}</button>
 
                 ))
             ):(
@@ -273,12 +273,12 @@ const handleFindOrder = async () => {
                                 <div className="row" >
                                 
                                 {filteredPets.length > 0 ? (
-                filteredPets.map((pet,index) => (
-                    <div className="col-4" style={{ marginBottom: "25px", marginTop: "25px" }} key={index}>
+                filteredPets.map((pet) => (
+                    <div className="col-4" style={{ marginBottom: "25px", marginTop: "25px" }} key={pet._id}>
                         <Cardcomp
 
                             name={pet.name}
-                            id={pet.id}
+                            id={pet._id}
                             photoURLs={pet.photoURLs ? pet.photoURLs : 'https://via.placeholder.com/250'}
                         
                         />
