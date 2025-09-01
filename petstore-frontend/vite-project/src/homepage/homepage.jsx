@@ -254,15 +254,15 @@ const handleFindOrder = async () => {
              setCategoryIndex(null);
             }}>All</button>
                 
-              {category.length>0? (category.map((category,index)=>(
+              {category.length>0? (category.map((cate,index)=>(
                     
-                    <button className="filterbtn ms-2" key={pets.id}
+                    <button className="filterbtn ms-2" key={cate.id||index}
                     style={{
-                        backgroundColor: categoryIndex === index ? "navy" : "white",
-                        color: categoryIndex === index ? "white" : "navy",
+                        backgroundColor: categoryIndex === cate.id ? "navy" : "white",
+                        color: categoryIndex === cate.id ? "white" : "navy",
                     }}
-                    onClick={() => {setSelectedCategory(category.category);
-                        setCategoryIndex(index)}}>{category.category}</button>
+                    onClick={() => {setSelectedCategory(cate.category);
+                        setCategoryIndex(cate.id)}}>{cate.category}</button>
 
                 ))
             ):(
